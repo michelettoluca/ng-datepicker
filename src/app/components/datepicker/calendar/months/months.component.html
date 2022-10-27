@@ -1,0 +1,8 @@
+<div class="months">
+   <div *ngFor="let month of months"
+        class="month"
+        (click)="calendar.handleSelection(month.value)">
+      {{ month.displayValue | titlecase }}
+   </div>
+</div>
+

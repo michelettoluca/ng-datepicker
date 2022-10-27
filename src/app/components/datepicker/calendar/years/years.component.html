@@ -1,0 +1,8 @@
+<div class="years">
+   <div *ngFor="let year of years$ | async"
+        class="year"
+        (click)="calendar.handleSelection(year.value)">
+      {{ year.displayValue | titlecase }}
+   </div>
+</div>
+

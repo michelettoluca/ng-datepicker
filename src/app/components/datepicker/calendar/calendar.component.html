@@ -1,0 +1,53 @@
+<pre>{{calendar.tmpValue.current | json}}</pre>
+<pre>{{calendar.value.current | json}}</pre>
+
+<div class="calendar">
+   <div class="header">
+      <button class="previous-period"
+              (click)="previousPeriod()">
+         <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="currentColor"
+              viewBox="0 0 256 256">
+            <rect width="256" height="256" fill="none"></rect>
+            <polyline points="160 208 80 128 160 48" fill="none" stroke="currentColor" stroke-linecap="round"
+                      stroke-linejoin="round" stroke-width="16"></polyline>
+         </svg>
+      </button>
+      <div [ngSwitch]="calendar.uiState.current.view"
+           class="current-period">
+         <span *ngSwitchCase="'year'">
+            Calendar
+         </span>
+         <span *ngSwitchCase="'month'">
+            {{calendar.uiState.current.period.toFormat("yyyy")}}
+         </span>
+         <span *ngSwitchCase="'day'">
+            {{calendar.uiState.current.period.toFormat("MMMM, yyyy")}}
+         </span>
+      </div>
+      <button class="next-period"
+              (click)="nextPeriod()">
+         <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="192" height="192" fill="currentColor"
+              viewBox="0 0 256 256">
+            <rect width="256" height="256" fill="none"></rect>
+            <polyline points="96 48 176 128 96 208" fill="none" stroke="currentColor" stroke-linecap="round"
+                      stroke-linejoin="round" stroke-width="16"></polyline>
+         </svg>
+      </button>
+   </div>
+   <div [ngSwitch]="calendar.uiState.current.view"
+        class="period">
+      <calendar-years *ngSwitchCase="'year'"></calendar-years>
+      <calendar-months *ngSwitchCase="'month'"></calendar-months>
+      <calendar-days *ngSwitchCase="'day'"></calendar-days>
+   </div>
+   <div class="actions">
+      <button class="cancel"
+              (click)="$event">
+         Cancel
+      </button>
+      <button class="confirm"
+              (click)="$event">
+         Confirm
+      </button>
+   </div>
+</div>

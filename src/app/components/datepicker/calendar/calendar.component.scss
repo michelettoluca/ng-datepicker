@@ -1,0 +1,100 @@
+@use "../constants" as *;
+
+button {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  border: 0;
+  background-color: unset;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.calendar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  padding: 1rem;
+
+  width: fit-content;
+
+  background-color: var(--calendar-background-color, $white);
+
+  border: 1px solid var(--calendar-border-color, $gray-300);
+  border-radius: 0.5rem;
+
+  box-shadow: $shadow;
+
+  .header {
+    display: flex;
+
+    gap: 0.5rem;
+
+    .next-period,
+    .previous-period {
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      height: $cell-size;
+      width: $cell-size;
+
+      border-radius: 0.25rem;
+
+      &:hover {
+        background-color: var(--hover-color, $gray-100);
+      }
+
+      .icon {
+        height: 1.25rem;
+        width: 1.25rem;
+      }
+    }
+
+    .current-period {
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      flex-grow: 1;
+
+      font-weight: 600;
+    }
+  }
+
+  .period {
+    width: $cell-size * 7;
+  }
+
+  .actions {
+    display: flex;
+
+    justify-content: flex-end;
+    gap: 1.25rem;
+
+    .cancel {
+      color: var(--primary-color, $gray-800);
+      font-weight: 600;
+
+      &:hover {
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        text-decoration-thickness: 2px;
+      }
+    }
+
+    .confirm {
+      padding: 0.5rem 0.75rem;
+
+      font-weight: 500;
+      color: var(--calendar-background-color, $white);
+
+      background-color: var(--primary-color, $gray-800);
+
+      border-radius: 0.25rem;
+    }
+  }
+}

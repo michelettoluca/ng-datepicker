@@ -1,0 +1,11 @@
+<div class="days">
+   <div *ngFor="let weekday of weekdays" class="weekday">{{weekday | uppercase}}</div>
+   <div *ngFor="let day of days$ | async"
+        class="day"
+        [ngClass]="{
+            'not-current-month': !day.isCurrentMonth
+        }"
+        (click)="calendar.handleSelection(day.value)">
+      {{ day.displayValue }}
+   </div>
+</div>

@@ -1,0 +1,26 @@
+@use "../../constants" as *;
+
+.years {
+   display: grid;
+
+   grid-template-columns: repeat(3, 1fr);
+   grid-template-rows: repeat(4, $cell-size);
+
+   row-gap: .25rem;
+
+   .year {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: .5rem;
+
+      border-radius: .25rem;
+
+      cursor: pointer;
+
+      &:hover {
+         background-color: var(--hover-color, $gray-100);
+      }
+   }
+}
