@@ -13,3 +13,16 @@ $gray-900: #111827;
 $shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 
 $cell-size: 2.5rem;
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(.5rem);
+    }
+}
+
+$fadeIn: fadeIn 150ms cubic-bezier(.4, 0, .2, 1);

@@ -7,12 +7,13 @@ import { YearsComponent } from "./calendar/years/years.component";
 import { MonthsComponent } from "./calendar/months/months.component";
 import { CalendarComponent } from "./calendar/calendar.component";
 import { CalendarService } from "./calendar/calendar.service";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
-   declarations: [DatepickerComponent, CalendarComponent, YearsComponent, MonthsComponent, DaysComponent],
-   imports: [CommonModule, FormsModule, ReactiveFormsModule],
-   providers: [CalendarService],
-   exports: [DatepickerComponent]
+    declarations: [DatepickerComponent, CalendarComponent, YearsComponent, MonthsComponent, DaysComponent],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, BrowserAnimationsModule],
+    providers: [CalendarService],
+    exports: [DatepickerComponent]
 })
 export class DatepickerModule {
 }

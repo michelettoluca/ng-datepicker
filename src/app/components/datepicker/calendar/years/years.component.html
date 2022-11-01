@@ -1,8 +1,12 @@
-<div class="years">
-   <div *ngFor="let year of years$ | async"
-        class="year"
-        (click)="calendar.handleSelection(year.value)">
-      {{ year.displayValue | titlecase }}
-   </div>
+<div class="items years">
+    <div *ngFor="let year of years$ | async"
+         class="item"
+         [ngClass]="{
+            'is-today': year.isToday,
+            'active': isSelected(year.value)
+         }"
+         (click)="calendar.handleSelection(year.value)">
+        {{ year.displayValue }}
+    </div>
 </div>
 

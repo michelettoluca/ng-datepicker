@@ -1,8 +1,12 @@
-<div class="months">
-   <div *ngFor="let month of months"
-        class="month"
-        (click)="calendar.handleSelection(month.value)">
-      {{ month.displayValue | titlecase }}
-   </div>
+<div class="items months">
+    <div *ngFor="let month of months$ | async"
+         class="item"
+         [ngClass]="{
+            'is-today': month.isToday,
+            'active': isSelected(month.value)
+         }"
+         (click)="calendar.handleSelection(month.value)">
+        {{ month.displayValue | titlecase }}
+    </div>
 </div>
 

@@ -1,30 +1,52 @@
-import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
-import { CalendarService, DatePickerConfig, Period } from "./calendar.service";
-import { DateTime } from "luxon";
+import {
+    ChangeDetectionStrategy,
+    Component,
+    ElementRef,
+    EventEmitter,
+    HostListener,
+    Input, OnInit,
+    Output,
+    ViewEncapsulation
+} from "@angular/core";
+import { CalendarService, DatePickerConfig } from "./calendar.service";
 
 @Component({
-   selector: "calendar",
-   templateUrl: "./calendar.component.html",
-   styleUrls: ["./calendar.component.scss"],
-   providers: [CalendarService],
-   changeDetection: ChangeDetectionStrategy.OnPush
+    selector: "sium-calendar",
+    templateUrl: "./calendar.component.html",
+    styleUrls: ["./calendar.component.scss"],
+    providers: [CalendarService],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CalendarComponent {
-   constructor(public calendar: CalendarService) {
-   }
+    constructor(private elementRef: ElementRef,
+                public calendar: CalendarService) {
+    }
 
-   @Input()
-   public set config(config: DatePickerConfig) {
-      this.calendar.config = config;
-   }
+    @Output() public eventEmitter = new EventEmitter();
 
-   public previousPeriod() {
-      this.calendar.changePeriod("previous");
-   };
+    @HostListener("document:click", ["$event"])
+    handleClickOutside(event: PointerEvent) {
+        if (!event.composedPath().includes(this.elementRef.nativeElement)) {
+            this.eventEmitter.emit();
+        }
+    }
 
-   public nextPeriod() {
-      this.calendar.changePeriod("next");
-   };
+    @Input()
+    public set config(config: DatePickerConfig) {
+        this.calendar.config = config;
+        this.calendar.init();
+    }
 
+    public previousPeriod() {
+        this.calendar.changePeriod("previous");
+    };
+
+    public nextPeriod() {
+        this.calendar.changePeriod("next");
+    };
+
+    public previousView() {
+        this.calendar.previousView();
+    }
 
 }
