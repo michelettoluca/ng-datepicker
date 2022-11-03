@@ -1,0 +1,9 @@
+<div class="cell"
+     [ngClass]="{
+        'now': isNow,
+        'active': isActive,
+        'not-current-period': !isCurrentPeriod
+     }"
+     (click)="handleClick()">
+    {{ displayValue }}
+</div>

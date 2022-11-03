@@ -1,0 +1,7 @@
+@use "../constants" as *;
+
+.grid {
+    display: grid;
+
+    gap: .125rem;
+}

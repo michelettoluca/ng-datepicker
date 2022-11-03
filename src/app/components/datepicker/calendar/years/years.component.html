@@ -1,12 +1,7 @@
-<div class="items years">
-    <div *ngFor="let year of years$ | async"
-         class="item"
-         [ngClass]="{
-            'is-today': year.isToday,
-            'active': isSelected(year.value)
-         }"
-         (click)="calendar.handleSelection(year.value)">
-        {{ year.displayValue }}
-    </div>
+<div class="grid years">
+    <ngl-cell *ngFor="let year of years$ | async"
+              [value]="year"
+              [displayValue]="year.year">
+    </ngl-cell>
 </div>
 

@@ -1,18 +1,12 @@
 <div class="weekdays">
     <span *ngFor="let weekday of weekdays"
-         class="weekday">
+          class="weekday">
         {{weekday | uppercase}}
     </span>
 </div>
-<div class="items days">
-    <div *ngFor="let day of days$ | async"
-         class="item"
-         [ngClass]="{
-            'is-today': day.isToday,
-            'not-current-month': !day.isCurrentMonth,
-            'active': isSelected(day.value)
-         }"
-         (click)="calendar.handleSelection(day.value)">
-        {{ day.displayValue }}
-    </div>
+<div class="grid days">
+    <ngl-cell *ngFor="let day of days$ | async"
+              [value]="day"
+              [displayValue]="day.day">
+    </ngl-cell>
 </div>

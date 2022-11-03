@@ -1,4 +1,6 @@
-<div class="calendar">
+<div ngl-click-outside
+     class="calendar"
+     (onClickOutside)="handleClickOutside()">
     <div class="header">
         <button class="previous-period"
                 (click)="previousPeriod()">
@@ -37,12 +39,12 @@
     </div>
     <div [ngSwitch]="calendar.uiState.current.view"
          class="period">
-        <calendar-years *ngSwitchCase="'year'"></calendar-years>
-        <calendar-months *ngSwitchCase="'month'"></calendar-months>
-        <calendar-days *ngSwitchCase="'day'"></calendar-days>
+        <ngl-calendar-years *ngSwitchCase="'year'"></ngl-calendar-years>
+        <ngl-calendar-months *ngSwitchCase="'month'"></ngl-calendar-months>
+        <ngl-calendar-days *ngSwitchCase="'day'"></ngl-calendar-days>
     </div>
     <div *ngIf="calendar.config.selectionType === 'multiple'"
-        class="actions">
+         class="actions">
         <button class="cancel"
                 (click)="$event">
             Cancel
@@ -52,6 +54,6 @@
             Confirm
         </button>
     </div>
-<!--    <pre>tmpValue: {{calendar.tmpValue.current | json}}</pre>-->
-<!--    <pre>value: {{calendar.value.current | json}}</pre>-->
+    <!--    <pre>tmpValue: {{calendar.tmpValue.current | json}}</pre>-->
+    <!--    <pre>value: {{calendar.value.current | json}}</pre>-->
 </div>

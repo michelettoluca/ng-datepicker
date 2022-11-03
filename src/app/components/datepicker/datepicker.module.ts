@@ -8,9 +8,11 @@ import { MonthsComponent } from "./calendar/months/months.component";
 import { CalendarComponent } from "./calendar/calendar.component";
 import { CalendarService } from "./calendar/calendar.service";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { NglClickOutside } from "../../classes/ngl-click-outside";
+import { NglCell } from "./calendar/cell/cell.component";
 
 @NgModule({
-    declarations: [DatepickerComponent, CalendarComponent, YearsComponent, MonthsComponent, DaysComponent],
+    declarations: [DatepickerComponent, CalendarComponent, YearsComponent, MonthsComponent, DaysComponent, NglCell, NglClickOutside],
     imports: [CommonModule, FormsModule, ReactiveFormsModule, BrowserAnimationsModule],
     providers: [CalendarService],
     exports: [DatepickerComponent]

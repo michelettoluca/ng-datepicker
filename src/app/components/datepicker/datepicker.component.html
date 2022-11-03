@@ -1,7 +1,7 @@
 <div style="margin-top: 3rem">
     <button (click)="toggleShowPopout($event)">Display calendar</button>
 </div>
-<sium-calendar *ngIf="showCalendar"
+<ngl-calendar *ngIf="showCalendar"
                (eventEmitter)="showCalendar = false"
-               [config]="config"></sium-calendar>
+               [config]="config"></ngl-calendar>
 
