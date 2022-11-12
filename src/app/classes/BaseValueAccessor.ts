@@ -3,24 +3,22 @@ import {
     ControlValueAccessor,
     NG_VALIDATORS,
     NG_VALUE_ACCESSOR,
-    ValidationErrors,
     Validator
 } from "@angular/forms";
 import { forwardRef, Provider, } from "@angular/core";
-import { BehaviorSubject } from "rxjs";
 
-export type OnChange<T> = (value: T) => void;
+export type OnChange<T> = (value: T | null) => void;
 export type OnTouched = () => void;
 export type OnValidatorChange = () => void;
 
-export abstract class BaseValueAccessor<T = any> implements ControlValueAccessor, Validator {
-    private _value!: T;
+export abstract class BaseValueAccessor<T> implements ControlValueAccessor, Validator {
+    private _value: T | null = null;
 
-    get value() {
+    public get value() {
         return this._value;
     }
 
-    set value(value: T) {
+    public set value(value: T | null) {
         this._value = value;
         this._onChange(this._value);
     }
@@ -31,41 +29,41 @@ export abstract class BaseValueAccessor<T = any> implements ControlValueAccessor
         return this.control?.touched && this.control?.errors;
     }
 
-    // --- Placeholder functions for ngModel
-    private _onChange: OnChange<T> = (value) => {
-    };
-    onTouched: OnTouched = () => {
-    };
-    private _onValidatorChange: OnValidatorChange = () => {
-    };
+    public onTouched: OnTouched = () => {
+    }
 
-
-    writeValue(value: T): void {
+    public writeValue(value: T) {
         this.value = value;
     }
 
-    registerOnChange(onChange: OnChange<T>): void {
+    public registerOnChange(onChange: OnChange<T>) {
         this._onChange = onChange;
     }
 
-    registerOnTouched(onTouched: OnTouched): void {
+    public registerOnTouched(onTouched: OnTouched) {
         this.onTouched = onTouched;
     }
 
-    registerOnValidatorChange(onValidatorChange: OnValidatorChange): void {
+    public registerOnValidatorChange(onValidatorChange: OnValidatorChange) {
         this._onValidatorChange = onValidatorChange;
     }
 
-    validate(control: AbstractControl): ValidationErrors | null {
+    public validate(control: AbstractControl) {
         if (this.control != control) {
             this.control = control;
         }
 
-        return null;
+        return control.errors;
     }
 
-    setDisabledState?(isDisabled: boolean): void {
+    public setDisabledState?(isDisabled: boolean) {
         throw new Error("Method not implemented.");
+    }
+
+    // --- Placeholder functions for ngModel
+    private _onChange: OnChange<T> = (value) => {
+    }
+    private _onValidatorChange: OnValidatorChange = () => {
     }
 
     // Utils

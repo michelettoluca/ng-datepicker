@@ -12,14 +12,17 @@ export class NglCell {
     constructor(private calendar: CalendarService) {
     }
 
-    @Input() public value!: DateTime;
-    @Input() public displayValue!: string | number;
+    @Input()
+    public value!: DateTime;
+
+    @Input()
+    public displayValue!: string | number;
 
     public handleClick() {
-        this.calendar.handleSelection(this.value)
+        this.calendar.handleSelection(this.value);
     }
 
-    public get isNow() {
+    public get isToday() {
         const now = DateTime.now();
         const { view } = this.calendar.uiState.current;
 
@@ -39,7 +42,7 @@ export class NglCell {
     }
 
     public get isActive() {
-        const value = this.calendar.value.current;
+        const value = this.calendar.value;
 
         if (!value) {
             return false;
@@ -53,11 +56,24 @@ export class NglCell {
     public get isCurrentPeriod() {
         const { view, period } = this.calendar.uiState.current;
 
-        if(view !== "day") {
+        if (view !== "day") {
             return true;
         }
 
-        return this.value.month === period.month
+        return this.value.month === period.month;
+    }
+
+    public get isInRange() {
+        const { selectionType } = this.calendar.config;
+        const { value } = this.calendar;
+
+        if (selectionType !== "range") {
+            return false;
+        }
+
+        return Array.isArray(value)
+            && this.value >= value?.[0]
+            && this.value <= value?.[1];
     }
 
     private checkValue(value: DateTime) {

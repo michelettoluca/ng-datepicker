@@ -7,12 +7,12 @@ export class NglClickOutside {
     constructor(private elementRef: ElementRef) {
     }
 
-    @Output() public onClickOutside = new EventEmitter();
+    @Output() public clickOutside = new EventEmitter();
 
     @HostListener("document:click", ["$event"])
     handleClickOutside(event: PointerEvent) {
         if (!event.composedPath().includes(this.elementRef.nativeElement)) {
-            this.onClickOutside.emit();
+            this.clickOutside.emit();
         }
     }
 }

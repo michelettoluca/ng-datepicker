@@ -1,7 +1,8 @@
 <div class="cell"
      [ngClass]="{
-        'now': isNow,
+        'today': isToday,
         'active': isActive,
+        'in-range': isInRange,
         'not-current-period': !isCurrentPeriod
      }"
      (click)="handleClick()">

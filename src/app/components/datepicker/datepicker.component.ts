@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from "@angular/core";
+import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { DatePickerConfig } from "./calendar/calendar.service";
 import { BaseValueAccessor } from "../../classes/BaseValueAccessor";
 
@@ -9,14 +9,17 @@ import { BaseValueAccessor } from "../../classes/BaseValueAccessor";
     providers: [...BaseValueAccessor.makeProviders(DatepickerComponent)],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DatepickerComponent extends BaseValueAccessor {
-    constructor() {
-        super();
-    }
+export class DatepickerComponent extends BaseValueAccessor<String | String[]> {
+    public aa: string = "2010-08-15T00:00:00.000+02:00";
 
-    @Input() public config!: DatePickerConfig;
+    @Input()
+    public config!: DatePickerConfig;
 
     public showCalendar: boolean = true;
+
+    handleClickOutside() {
+        this.showCalendar = false;
+    }
 
     toggleShowPopout(event: Event) {
         event.stopPropagation();

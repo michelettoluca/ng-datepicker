@@ -1,6 +1,4 @@
-<div ngl-click-outside
-     class="calendar"
-     (onClickOutside)="handleClickOutside()">
+<div class="calendar">
     <div class="header">
         <button class="previous-period"
                 (click)="previousPeriod()">
@@ -54,6 +52,6 @@
             Confirm
         </button>
     </div>
-    <!--    <pre>tmpValue: {{calendar.tmpValue.current | json}}</pre>-->
-    <!--    <pre>value: {{calendar.value.current | json}}</pre>-->
+        <pre>tmpValue: {{calendar.tmpValue | json}}</pre>
+        <pre>value: {{calendar.value | json}}</pre>
 </div>

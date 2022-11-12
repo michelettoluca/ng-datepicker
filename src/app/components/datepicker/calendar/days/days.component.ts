@@ -13,7 +13,7 @@ export class DaysComponent {
     constructor(public calendar: CalendarService) {
     }
 
-    public weekdays = Info.weekdaysFormat("short", {locale: "en"});
+    public weekdays = Info.weekdaysFormat("short");
 
     public days$: Observable<DateTime[]> = this.calendar.uiState.$.pipe(
         map(({ period }) => {

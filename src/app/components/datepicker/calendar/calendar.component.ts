@@ -1,11 +1,6 @@
-import {
-    ChangeDetectionStrategy,
-    Component,
-    EventEmitter,
-    Input,
-    Output,
-} from "@angular/core";
-import { CalendarService, DatePickerConfig } from "./calendar.service";
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, } from "@angular/core";
+import { CalendarService, DatePickerConfig, Direction } from "./calendar.service";
+import { DateTime } from "luxon";
 
 @Component({
     selector: "ngl-calendar",
@@ -21,26 +16,33 @@ export class CalendarComponent {
     @Input()
     public set config(config: DatePickerConfig) {
         this.calendar.config = config;
-        this.calendar.init();
     }
 
-    @Output() public eventEmitter = new EventEmitter();
+    @Input()
+    public set value(value: string | string[] | null) {
+        if (!value) {
+            this.calendar.value = null;
 
-    public handleClickOutside() {
-        this.eventEmitter.emit()
+            return;
+        }
+
+        this.calendar.value = Array.isArray(value)
+            ? value.map(v => DateTime.fromISO(v))
+            : DateTime.fromISO(value);
     }
 
+    @Output()
+    public select = new EventEmitter();
 
     public previousPeriod() {
-        this.calendar.changePeriod("previous");
-    };
+        this.calendar.changePeriod(Direction.PREVIOUS);
+    }
 
     public nextPeriod() {
-        this.calendar.changePeriod("next");
-    };
+        this.calendar.changePeriod(Direction.NEXT);
+    }
 
     public previousView() {
         this.calendar.previousView();
     }
-
 }

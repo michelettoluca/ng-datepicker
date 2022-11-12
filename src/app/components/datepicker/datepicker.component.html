@@ -1,7 +1,11 @@
 <div style="margin-top: 3rem">
     <button (click)="toggleShowPopout($event)">Display calendar</button>
 </div>
+<pre>{{aa | json}}</pre>
 <ngl-calendar *ngIf="showCalendar"
-               (eventEmitter)="showCalendar = false"
-               [config]="config"></ngl-calendar>
+              ngl-click-outside
+              [config]="config"
+              [value]="aa"
+              (clickOutside)="handleClickOutside()">
+</ngl-calendar>
 
