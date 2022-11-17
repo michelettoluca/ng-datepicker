@@ -5,23 +5,31 @@ import {
     NG_VALUE_ACCESSOR,
     Validator
 } from "@angular/forms";
-import { forwardRef, Provider, } from "@angular/core";
+import { Directive, EventEmitter, forwardRef, Input, Output, Provider, } from "@angular/core";
 
 export type OnChange<T> = (value: T | null) => void;
 export type OnTouched = () => void;
 export type OnValidatorChange = () => void;
 
+@Directive()
 export abstract class BaseValueAccessor<T> implements ControlValueAccessor, Validator {
-    private _value: T | null = null;
+    private _value!: T;
 
     public get value() {
         return this._value;
     }
 
-    public set value(value: T | null) {
+    @Input() public set value(value: T) {
+        if(this._value === value) {
+            return;
+        }
+
         this._value = value;
+        this.valueChange.emit(this._value)
         this._onChange(this._value);
     }
+
+    @Output() public valueChange: EventEmitter<T> = new EventEmitter<T>()
 
     public control?: AbstractControl;
 
@@ -60,8 +68,8 @@ export abstract class BaseValueAccessor<T> implements ControlValueAccessor, Vali
         throw new Error("Method not implemented.");
     }
 
-    // --- Placeholder functions for ngModel
-    private _onChange: OnChange<T> = (value) => {
+    // Placeholder functions for ControlValueAccessor
+    private _onChange: OnChange<T> = () => {
     }
     private _onValidatorChange: OnValidatorChange = () => {
     }
